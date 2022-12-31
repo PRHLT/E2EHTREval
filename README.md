@@ -15,13 +15,10 @@ conda create -n Eval-E2EHTR python=3.6
 conda activate Eval-E2EHTR
 
 pip install numpy
-pip install openfst-python
 pip install scipy
-pip install matplotlib
-
 pip install pybind11
 
-# Install modified version of the python package **fastwer**
+# Install modified version of the python package "fastwer"
 git clone https://github.com/PRHLT/fastwer.git
 cd fastwer
 python setup.py install
