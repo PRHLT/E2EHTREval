@@ -1,6 +1,8 @@
 EvalE2EHTR
 ====
 
+The EvalE2EHTR tool implements different metrics employed to evaluate End-to-End HTR approaches, Most of its functionalities have been programed in python, like computation of the NSFD metric and the building of the edit-distance-based cost-matrix with the proposed regularization factor for using with the Hungarian algorithm (HA). Regarding the time-critical HA computation, we employ the implementation provided by the scipy library15 implemented in C and with a python-wrapper, which is based on the one described in [15]. For the also time-critical Levenshtein edit-distance computation, it was used [fasterwer](https://github.com/kahne/fastwer), a library written in C++ and wrapped in python for ease of use. In this library we have also included support for UTF-8 encoding as well as others time-critical functionalities like the implementation of bag-of-words based on hashing for faster computation, and the implementation of the backtrace algorithm to obtain the aligning-path through a minimum edit-distance between reference and hypothesis strings.
+
 A python package for fast word/character error rate (WER/CER) calculation
 * fast (cpp implementation)
 * page-level WER, CER, bWER and hWER scores
