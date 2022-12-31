@@ -1,4 +1,4 @@
-Running parameters: Namespace(addDummies=True, ctxtLeng=0, dataDir='IAMDB/', fullDummies=True, hypExt='hyp', insDelFactor=0.5, reIns=False, refExt='ref', regFactor=1.0, sortAlign=False, verbTimes=False, werOrig=True)
+Running parameters: Namespace(addDummies=True, ctxtLeng=0, dataDir='IAMDB/', fullDummies=True, hypExt='hyp', insDelFactor=0.5, reIns=False, refExt='ref', regFactor=1.0, sortAlign=False, verbTimes=False, werHung=True)
 
 ********************************************************************************
 Processing files:
