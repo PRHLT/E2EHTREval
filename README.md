@@ -7,6 +7,7 @@ A python package for fast word/character error rate (WER/CER) calculation
 
 
 # Installation
+In order to install EvalE2EHTR, follow this recipe:
 ```bash
 conda create -n Eval-E2EHTR python=3.6
 conda activate Eval-E2EHTR
@@ -20,8 +21,8 @@ pip install pybind11
 ```
 
 # Example
+To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) reference-predicted text samples:
 ```bash
-# To evaluate the IAMDB reference-predicted text samples:
 EvalE2EHTR.py -w IAMDB/ > iamdb.out
 ```
 
