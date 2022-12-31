@@ -21,10 +21,10 @@ pip install pybind11
 ```
 
 # Example
-To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) reference-predicted text samples:
+To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) paragraph-level reference & predicted text samples:
 ```bash
 EvalE2EHTR.py -w IAMDB/ > iamdb.out
 ```
 
 # Contact
-Alejandro H. Toselli (ahector@prhlt.upv.es)
+Enrique Vidal (evidal@prhlt.upv.es) and Alejandro H. Toselli (ahector@prhlt.upv.es)
