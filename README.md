@@ -20,6 +20,11 @@ pip install scipy
 pip install matplotlib
 
 pip install pybind11
+
+# Install modified version of the python package **fastwer**
+git clone https://github.com/PRHLT/fastwer.git
+cd fastwer
+python setup.py install
 ```
 
 # Example
