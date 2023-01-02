@@ -9,7 +9,7 @@ A python package for fast word/character error rate (WER/CER) calculation
 
 
 # Installation
-In order to install EvalE2EHTR, follow this recipe:
+Installation through [conda](https://anaconda.org) is high recommended. In order to install EvalE2EHTR, follow this recipe:
 ```bash
 conda create -n Eval-E2EHTR python=3.6
 conda activate Eval-E2EHTR
