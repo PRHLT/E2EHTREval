@@ -27,8 +27,9 @@ python setup.py install
 # Example
 To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) paragraph-level reference & predicted text samples:
 ```bash
-EvalE2EHTR.py -w IAMDB/ > iamdb.out
+EvalE2EHTR.py -H IAMDB/ > iamdb.out
 ```
+**-H** option includes also the computation of Hungarian's WER/CER.
 
 # Contact
 Enrique Vidal (evidal@prhlt.upv.es) and Alejandro H. Toselli (ahector@prhlt.upv.es)
