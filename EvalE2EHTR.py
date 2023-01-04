@@ -388,8 +388,14 @@ def main():
             'ERROR: Inconsistency with reference lengths !'
         glob_lvd_wl_org += lvd_wl_org; glob_lvd_cl_org += lvd_cl_org
         if verbT==1:
-            print(f'\n   WER_lev: {lvd_wl_org:4d} {lenW:6d} {lvd_wl_org/lenW*100:6.2f}%    (S:{SIDerr[0]} I:{SIDerr[1]} D:{SIDerr[2]} C:{SIDerr[3]})')
-            print(f'   CER_lev: {lvd_cl_org:4d} {lenC:6d} {lvd_cl_org/lenC*100:6.2f}%')
+            if lenW>0:
+                print(f'\n   WER_lev: {lvd_wl_org:4d} {lenW:6d} {lvd_wl_org/lenW*100:6.2f}%    (S:{SIDerr[0]} I:{SIDerr[1]} D:{SIDerr[2]} C:{SIDerr[3]})')
+            else:
+                print(f'\n   WER_lev: {lvd_wl_org:4d} {lenW:6d} {lenW*1.0:6.2f}%    (S:{SIDerr[0]} I:{SIDerr[1]} D:{SIDerr[2]} C:{SIDerr[3]})')
+            if lenC>0:
+                print(f'   CER_lev: {lvd_cl_org:4d} {lenC:6d} {lvd_cl_org/lenC*100:6.2f}%')
+            else:
+                print(f'   CER_lev: {lvd_cl_org:4d} {lenC:6d} {lenC*1.0:6.2f}%')
 
         ti = timeit.default_timer()
         bow_alg, acc_bow = compute_BOW(y, x)
@@ -406,8 +412,10 @@ def main():
             glob_SIDerrBoW[2]+=dfa
         glob_SIDerrBoW[3]+=acc_bow
         if verbT==1:
-            print(f'\n   WER_bow: {(bow_alg-dfa)//2 + dfa:4d} {lenW:6d} {((bow_alg-dfa)//2 + dfa) / lenW*100:6.2f}%    ({sid})')
-
+            if lenW>0:
+                print(f'\n   WER_bow: {(bow_alg-dfa)//2 + dfa:4d} {lenW:6d} {((bow_alg-dfa)//2 + dfa) / lenW*100:6.2f}%    ({sid})')
+            else:
+                print(f'\n   WER_bow: {(bow_alg-dfa)//2 + dfa:4d} {lenW:6d} {lenW*1.0:6.2f}%    ({sid})')
 
         if args.hung:        
             ti = timeit.default_timer() 
@@ -419,9 +427,16 @@ def main():
             glob_lvd_wl_alg += lvd_wl_alg; glob_lvd_cl_alg += lvd_cl_alg
             glob_lvd_wl_hun += hWER
             if verbT==1:
-                print(f'\n   WER_hun: {hWER:4d} {lenW:6d} {hWER/lenW*100:6.2f}%')
-                print(f'   WER_hlv: {lvd_wl_alg:4d} {lenW:6d} {lvd_wl_alg/lenW*100:6.2f}%')
-                print(f'   CER_hlv: {lvd_cl_alg:4d} {lenC:6d} {lvd_cl_alg/lenC*100:6.2f}%')
+                if lenW>0:
+                    print(f'\n   WER_hun: {hWER:4d} {lenW:6d} {hWER/lenW*100:6.2f}%')
+                    print(f'   WER_hlv: {lvd_wl_alg:4d} {lenW:6d} {lvd_wl_alg/lenW*100:6.2f}%')
+                else:
+                    print(f'\n   WER_hun: {hWER:4d} {lenW:6d} {lenW*1.0:6.2f}%')
+                    print(f'   WER_hlv: {lvd_wl_alg:4d} {lenW:6d} {lenW*1.0:6.2f}%')
+                if lenC>0:
+                    print(f'   CER_hlv: {lvd_cl_alg:4d} {lenC:6d} {lvd_cl_alg/lenC*100:6.2f}%')
+                else:
+                    print(f'   CER_hlv: {lvd_cl_alg:4d} {lenC:6d} {lenC*1.0:6.2f}%')
 
             dsts_lvDst = nrSpearmanDstWER_woDmy(wl_algn_org)
             glob_dst2_alg += dsts_lvDst*lenW
@@ -434,7 +449,10 @@ def main():
 
             if args.ctxtLeng == 0 and args.insDelFactor == 1.0:
                 glob_lvd_cl_hun += int(scr)
-                print(f'\n   CER_cst: {int(scr):4d} {len(x):6d} {scr/len(x)*100:6.2f}%')
+                if len(x)>0:
+                    print(f'\n   CER_cst: {int(scr):4d} {len(x):6d} {scr/len(x)*100:6.2f}%')
+                else:
+                    print(f'\n   CER_cst: {int(scr):4d} {len(x):6d} {len(x)*1.0:6.2f}%')
 
             
     g_wer_org, g_cer_org, g_bow_alg, g_wer_hun, g_wer_alg, g_cer_alg, \
