@@ -54,16 +54,16 @@ EvalE2EHTR.py -H IAMDB/ > iamdb.out
 
 The meaning with the paper cited above are as follows:
 
-G-WER_lev  (WER)
-G-CER_lev  (CER) 
+- **G-WER_lev**  (WER)
+- **G-CER_lev**  (CER) 
 
-G-WER_bow (bWER)
+- **G-WER_bow** (bWER)
 
-G-WER_hun (hWER)
-G-WER_hlv WER between HA-aligned texts
-G-CER_hlv CER between HA-aligned texts (hCER)
+- **G-WER_hun** (hWER)
+- **G-WER_hlv** WER between HA-aligned texts
+- **G-CER_hlv** CER between HA-aligned texts (hCER)
 
-G-SPR_hun (NSFD
+- **G-SPR_hun** (NSFD)
 
 
 # Contact
