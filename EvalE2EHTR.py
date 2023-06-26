@@ -482,9 +482,9 @@ def main():
         print(f'G-WER_hlv: {glob_lvd_wl_alg:6d} {glob_ref_wl:6d} {g_wer_alg*100:6.2f}% ±({ic_wer_alg*100:.2f}%)')
         print(f'G-CER_hlv: {glob_lvd_cl_alg:6d} {glob_ref_cl:6d} {g_cer_alg*100:6.2f}% ±({ic_cer_alg*100:.2f}%)')
 
-        print(f'\nG-SPR_lev: {glob_dst2_alg / glob_ref_wl:.6f} (Average normalized Spearman\'s footrule distance)')
-        print(f'G-SPR_hun: {glob_dst0_alg / glob_ref_wl:.6f} (Average normalized Spearman\'s footrule distance)')
-        print(f'G-DIF_hun: {glob_dst1_alg / glob_ref_wl:.6f} (Average normalized Differential distance)')
+        #print(f'\nG-SPR_lev: {glob_dst2_alg / glob_ref_wl:.6f} (Average normalized Spearman\'s footrule distance)')
+        print(f'\nG-SPR_hun: {glob_dst0_alg / glob_ref_wl:.6f} (Average normalized Spearman\'s footrule distance)')
+        #print(f'G-DIF_hun: {glob_dst1_alg / glob_ref_wl:.6f} (Average normalized Differential distance)')
 
         if args.ctxtLeng == 0 and args.insDelFactor == 1.0:
             print(f'\nG-CER_cst: {glob_lvd_cl_hun:4d} {glob_ref_cl:6d} {g_cer_hun*100:6.2f}% ±({ic_cer_hun*100:.2f}%)')

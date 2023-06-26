@@ -24,12 +24,47 @@ cd fastwer
 python setup.py install
 ```
 
-# Example
+If you find this evaluation tool useful, please cite:
+```
+@article{VIDAL2023109695,
+  title = {End-to-End page-Level assessment of handwritten text recognition},
+  journal = {Pattern Recognition},
+  volume = {142},
+  pages = {109695},
+  year = {2023},
+  issn = {0031-3203},
+  doi = {https://doi.org/10.1016/j.patcog.2023.109695},
+  author = {Enrique Vidal and Alejandro H. Toselli and Antonio Ríos-Vila and Jorge Calvo-Zaragoza}
+}
+```
+Check this paper for more details [Pattern Recognition](https://www.sciencedirect.com/science/article/pii/S003132032300393X).
+
+
+# Example of use
 To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) paragraph-level reference & predicted text samples:
+```bash
+EvalE2EHTR.py IAMDB/ > iamdb.out
+```
+If the difference between G-WER\_lev and G-WER\_bow (WER-bWER) is not 0 or very low then there are reading-order mistmatches between reference and hypothesis transcripts.
+
+**-H** option shows also the computation of Hungarian's WER/CER and the Normalized Spearman foot-rule distance (NSFD).
 ```bash
 EvalE2EHTR.py -H IAMDB/ > iamdb.out
 ```
-**-H** option includes also the computation of Hungarian's WER/CER.
+
+The meaning with the paper cited above are as follows:
+
+G-WER_lev  (WER)
+G-CER_lev  (CER) 
+
+G-WER_bow (bWER)
+
+G-WER_hun (hWER)
+G-WER_hlv WER between HA-aligned texts
+G-CER_hlv CER between HA-aligned texts (hCER)
+
+G-SPR_hun (NSFD
+
 
 # Contact
 Enrique Vidal (evidal@prhlt.upv.es) and Alejandro H. Toselli (ahector@prhlt.upv.es)
