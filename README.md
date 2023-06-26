@@ -37,7 +37,7 @@ If you find this evaluation tool useful, please cite:
   author = {Enrique Vidal and Alejandro H. Toselli and Antonio Ríos-Vila and Jorge Calvo-Zaragoza}
 }
 ```
-Check this paper for more details [Pattern Recognition](https://www.sciencedirect.com/science/article/pii/S003132032300393X).
+For more details, check this paper at [Pattern Recognition Journal](https://www.sciencedirect.com/science/article/pii/S003132032300393X).
 
 
 # Example of use
@@ -52,7 +52,7 @@ If the difference between G-WER\_lev and G-WER\_bow (WER-bWER) is not 0 or very 
 EvalE2EHTR.py -H IAMDB/ > iamdb.out
 ```
 
-The names of the measures reported by this tool are related to those of the articlew cited above as follows:
+The names of the measures reported by this tool are related to those described in the article cited above as follows:
 - **G-WER_lev**:  WER
 - **G-CER_lev**:  CER 
 
