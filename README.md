@@ -1,7 +1,7 @@
 EvalE2EHTR
 ====
 
-The EvalE2EHTR tool implements different metrics employed to evaluate End-to-End HTR approaches, Most of its functionalities have been programed in python, like computation of the NSFD metric and the building of the edit-distance-based cost-matrix with the proposed regularization factor for using with the Hungarian algorithm (HA). Regarding the time-critical HA computation, we employ the implementation provided by the scipy library15 implemented in C and with a python-wrapper, which is based on the one described in [15]. For the also time-critical Levenshtein edit-distance computation, it was used [fasterwer](https://github.com/kahne/fastwer), a library written in C++ and wrapped in python for ease of use. In this library we have also included support for UTF-8 encoding as well as others time-critical functionalities like the implementation of bag-of-words based on hashing for faster computation, and the implementation of the backtrace algorithm to obtain the aligning-path through a minimum edit-distance between reference and hypothesis strings.
+The EvalE2EHTR tool implements different metrics employed to evaluate End-to-End HTR approaches, Most of its functionalities have been programed in python, like computation of the NSFD metric and the building of the edit-distance-based cost-matrix with the proposed regularization factor for using with the Hungarian algorithm (HA). Regarding the time-critical HA computation, we employ the implementation provided by the scipy library15 implemented in C and with a python-wrapper. For the also time-critical Levenshtein edit-distance computation, it was used [fasterwer](https://github.com/kahne/fastwer), a library written in C++ and wrapped in python for ease of use. In this library we have also included support for UTF-8 encoding as well as others time-critical functionalities like the implementation of bag-of-words based on hashing for faster computation, and the implementation of the backtrace algorithm to obtain the aligning-path through a minimum edit-distance between reference and hypothesis strings.
 
 A python package for fast word/character error rate (WER/CER) calculation
 * fast (cpp implementation)
@@ -43,11 +43,22 @@ For more details, check this paper at [Pattern Recognition Journal](https://www.
 # Example of use
 To try this evaluator on [IAMDB's](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) paragraph-level reference & predicted text samples:
 ```bash
-EvalE2EHTR.py IAMDB/ > iamdb.out
+EvalE2EHTR.py IAMDB/
 ```
+whose output must be:
+```
+Number of processed Samples: 336
+==================================================
+G-WER_lev:   6248  23406  26.69% ±(0.57%)    (S:5489 I:244 D:515 C:17402)
+G-CER_lev:   9454 125669   7.52% ±(0.15%)
+
+G-WER_bow:   6071  23406  25.94% ±(0.56%)    (S:5534 I:133 D:404 C:17468)
+==================================================
+```
+
 If the difference between G-WER\_lev and G-WER\_bow (WER-bWER) is not 0 or very low then there are reading-order mistmatches between reference and hypothesis transcripts.
 
-**-H** option shows also the computation of Hungarian's WER/CER and the Normalized Spearman foot-rule distance (NSFD).
+The **-H** option shows also the computation of Hungarian's WER/CER and the Normalized Spearman foot-rule distance (NSFD).
 ```bash
 EvalE2EHTR.py -H IAMDB/ > iamdb.out
 ```
