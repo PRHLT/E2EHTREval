@@ -56,7 +56,8 @@ G-WER_bow:   6071  23406  25.94% ±(0.56%)    (S:5534 I:133 D:404 C:17468)
 ==================================================
 ```
 
-If the difference between G-WER\_lev and G-WER\_bow (WER-bWER) is not 0 or very low then there are reading-order mistmatches between reference and hypothesis transcripts.
+The difference between G-WER_lev and G-WER_bow (WER-bWER) is a measure of the reading-order mistmatch between reference and
+hypothesis transcripts.
 
 The **-H** option shows also the computation of Hungarian's WER/CER and the Normalized Spearman foot-rule distance (NSFD).
 ```bash
