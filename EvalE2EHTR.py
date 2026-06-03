@@ -436,7 +436,7 @@ def main():
         
         if args.deltas:
             abow = (((bow_alg-dfa)//2 + dfa) / lenW) if lenW>0 else 0.0
-            arws, avoc = len(x_s + y_s), len(set(x_s + y_s))
+            arws, avoc = lenW + len(y_s), len(set(x_s + y_s))
             glob_EWRR += arws / (2 * avoc) * abow * lenW
         
         if args.hung:        
