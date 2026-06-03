@@ -516,7 +516,7 @@ def main():
         glob_EWRR /= glob_ref_wl
         #print(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
         gDL, gDR = Deltas(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
-        print(f'\nReliability Measures --- gDL: {gDL:4.2f}%   gDR: {gDR:4.2f}%')
+        print(f'\nReliability Measures --- DL: {gDL:4.2f}%   DR: {gDR:4.2f}%')
     print('='*50)
     
     
