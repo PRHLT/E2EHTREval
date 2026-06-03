@@ -76,7 +76,7 @@ The names of the measures reported by this tool are related to those described i
 
 - **G-SPR_hun**: NSFD
 
-The **-D** option also calculates and reports the $\Delta L$ and $\Delta R$ reliability measures, which measure whether the difference between **G-WER_lev** and **G-WER_bow** is due to a readind-order issue or to a word repetitiveness issue.
+The **-D** option also calculates and reports the $\Delta L$ and $\Delta R$ reliability measures, which measure whether the difference between **G-WER_lev** and **G-WER_bow** is due to a reading-order issue or to a word repetitiveness issue.
 ```bash
 EvalE2EHTR.py -D IAMDB/ > iamdb.out
 
