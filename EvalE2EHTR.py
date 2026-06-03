@@ -22,19 +22,24 @@ print = functools.partial(print, flush=True)
 DUMSYMB = "<DUMMY>"
 
 
-def Deltas(BoWErr, avgRefWrds, gEWRR):
-    a=3.77441
-    b=45.5037
-    R0=0.264942
+def Deltas(BoWErr, dBoWErr, avgRefWrds, gEWRR):
+    a, da = 3.77441, 0.173429
+    b, db = 45.5037, 1.164010
+    R0, dR0 = 0.264942, 0.00737759
     
+    E, dE = BoWErr, dBoWErr
     L = avgRefWrds
-    L0 = math.exp( (b - BoWErr*100) / a )
+    L0 = math.exp( (b - E*100) / a )
+    dL0 = math.sqrt(math.pow((L0*((E-b)/math.pow(a,2))*da),2)+math.pow((L0/a*db),2)+math.pow((L0/a*dE*100),2));
     DL = (L0 - L) / (L0 + L) * 100
-    
-    R = gEWRR
-    DR = (R0 - R) / (R0 + R) * 100
+    dDL=(2*L)/math.pow(L0+L,2)*dL0 * 100
 
-    return DL, DR
+    R = gEWRR
+    dR = R/E*dE
+    DR = (R0 - R) / (R0 + R) * 100
+    dDR=2/math.pow(R0+R,2) * math.sqrt(math.pow(R*dR,2)+math.pow(R0*dR0,2)) * 100
+
+    return DL, dDL, DR, dDR
 
 
 def nrSpearmanDstHUN(idx1, idx2, S1, S2, N, dumFct=1):
@@ -515,8 +520,8 @@ def main():
     if args.deltas:
         glob_EWRR /= glob_ref_wl
         #print(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
-        gDL, gDR = Deltas(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
-        print(f'\nReliability Measures --- DL: {gDL:4.2f}%   DR: {gDR:4.2f}%')
+        DL, dDL, DR, dDR = Deltas(g_bow_alg, ic_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
+        print(f'\nReliability Measures ---> DL: {DL:4.2f}% ±({dDL:.2f}%)  DR: {DR:4.2f}% ±({dDR:.2f}%)')
     print('='*50)
     
     
