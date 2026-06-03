@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard packages
-import sys, os, argparse
+import sys, os, argparse, math
 import glob, math, re
 import timeit
 from itertools import groupby
@@ -20,6 +20,21 @@ print = functools.partial(print, flush=True)
 
 
 DUMSYMB = "<DUMMY>"
+
+
+def Deltas(BoWErr, avgRefWrds, gEWRR):
+    a=3.77441
+    b=45.5037
+    R0=0.264942
+    
+    L = avgRefWrds
+    L0 = math.exp( (b - BoWErr*100) / a )
+    DL = (L0 - L) / (L0 + L) * 100
+    
+    R = gEWRR
+    DR = (R0 - R) / (R0 + R) * 100
+
+    return DL, DR
 
 
 def nrSpearmanDstHUN(idx1, idx2, S1, S2, N, dumFct=1):
@@ -310,6 +325,7 @@ def main():
     parser.add_argument('-x', '--insDelFactor', type=float, help='Factor to weigh insertion/deletions costs whem DUMMY words are used.', default=0.5)
     parser.add_argument('-g', '--regFactor', type=float, help='Regularization factor to weight relative word positions in the alignment computation of Hungarian algorithm.', default=1.0)
     parser.add_argument('-f', '--fullDummies', action='store_false', help='Not add dummy words to the references and hypotheses (this enables insertions and deletions simultaneously)', default=True)
+    parser.add_argument('-D', '--deltas', action='store_true', help='It also reports the global reliability measures "Delta": DL and DR', default=False)
     parser.add_argument('dataDir', type=dir_path, help='Directory of files containing reference transcripts (.ref) and corresponding predicted transcripts (.hyp).')
 
     args = parser.parse_args()
@@ -328,6 +344,7 @@ def main():
     print('Running parameters: {}'.format(args), file=sys.stdout)
     verbT = args.verbosity
 
+    glob_EWRR = 0.0
     glob_lvd_wl_org = glob_lvd_cl_org = 0
     glob_lvd_wl_alg = glob_lvd_cl_alg = 0
     glob_SIDerr, glob_SIDerrBoW = [0,0,0,0], [0,0,0,0]
@@ -416,7 +433,12 @@ def main():
                 print(f'\n   WER_bow: {(bow_alg-dfa)//2 + dfa:4d} {lenW:6d} {((bow_alg-dfa)//2 + dfa) / lenW*100:6.2f}%    ({sid})')
             else:
                 print(f'\n   WER_bow: {(bow_alg-dfa)//2 + dfa:4d} {lenW:6d} {lenW*1.0:6.2f}%    ({sid})')
-
+        
+        if args.deltas:
+            abow = (((bow_alg-dfa)//2 + dfa) / lenW) if lenW>0 else 0.0
+            arws, avoc = len(x_s + y_s), len(set(x_s + y_s))
+            glob_EWRR += arws / (2 * avoc) * abow * lenW
+        
         if args.hung:        
             ti = timeit.default_timer() 
             lvd_cl_alg = fastwer.compute(hyp, x, char_level=True)[0] + nic # Including inserted chars
@@ -488,9 +510,15 @@ def main():
 
         if args.ctxtLeng == 0 and args.insDelFactor == 1.0:
             print(f'\nG-CER_cst: {glob_lvd_cl_hun:4d} {glob_ref_cl:6d} {g_cer_hun*100:6.2f}% ±({ic_cer_hun*100:.2f}%)')
+        
+
+    if args.deltas:
+        glob_EWRR /= glob_ref_wl
+        #print(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
+        gDL, gDR = Deltas(g_bow_alg, glob_ref_wl/nSamples, glob_EWRR)
+        print(f'\nReliability Measures --- gDL: {gDL:4.2f}%   gDR: {gDR:4.2f}%')
     print('='*50)
     
-
     
 if __name__ == "__main__":
     main()
