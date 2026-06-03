@@ -79,6 +79,19 @@ The names of the measures reported by this tool are related to those described i
 The **-D** option also calculates and reports the $\Delta L$ and $\Delta R$ reliability measures, which measure whether the difference between **G-WER_lev** and **G-WER_bow** is due to a readind-order issue or to a word repetitiveness issue.
 ```bash
 EvalE2EHTR.py -D IAMDB/ > iamdb.out
+
+```
+whose output must be:
+```
+Number of processed Samples: 336
+==================================================
+G-WER_lev:   6248  23406  26.69% ±(0.57%)    (S:5489 I:244 D:515 C:17402)
+G-CER_lev:   9454 125669   7.52% ±(0.15%)
+
+G-WER_bow:   6071  23406  25.94% ±(0.56%)    (S:5534 I:133 D:404 C:17468)
+
+Reliability Measures --- DL: 43.83%   DR: 4.65%
+==================================================
 ```
 
 # Contact
